@@ -107,16 +107,18 @@ vim.api.nvim_create_user_command(
     }
 )
 
-vim.api.nvim_create_user_command(
-    "DefineReload",
-    function (ctx)
-        local plugin = require("lazy.core.config").plugins["define.nvim"]
-        require("lazy.core.loader").reload(plugin)
-    end,
-    {
-        desc = "[For Development] Reload this plugin",
-    }
-)
+if vim.g.define_devmode then
+    vim.api.nvim_create_user_command(
+        "DefineReload",
+        function (ctx)
+            local plugin = require("lazy.core.config").plugins["define.nvim"]
+            require("lazy.core.loader").reload(plugin)
+        end,
+        {
+            desc = "[For Development] Reload this plugin",
+        }
+    )
+end
 
 return {
     setup = setup,
